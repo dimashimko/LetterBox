@@ -3,13 +3,14 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # Або master
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: subosito/flutter-action@v2
         with:
@@ -19,8 +20,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Web
-        # ЗАМІНІТЬ <repository-name> на назву вашого репозиторію!
-        run: flutter build web --release --base-href "/LetterBoxWeb/"
+        run: flutter build web --release --base-href "/LetterBox/"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
