@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:letter_box/cubits/locale_cubit.dart';
 import 'package:letter_box/l10n/app_localizations.dart';
 import 'package:letter_box/cubits/settings_cubit.dart';
 import 'package:letter_box/cubits/settings_state.dart';
@@ -49,9 +50,29 @@ class _SettingsBody extends StatelessWidget {
             }
           }
 
+          final localeCubit = context.read<LocaleCubit>();
+          final currentLocale = context.watch<LocaleCubit>().state;
+
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
+              _SectionTitle(title: l10n.interfaceLanguageSection),
+              const SizedBox(height: 8),
+              SegmentedButton<Locale>(
+                segments: const [
+                  ButtonSegment(
+                    value: Locale('uk'),
+                    label: Text('UA'),
+                  ),
+                  ButtonSegment(
+                    value: Locale('en'),
+                    label: Text('EN'),
+                  ),
+                ],
+                selected: {currentLocale},
+                onSelectionChanged: (s) => localeCubit.setLocale(s.first),
+              ),
+              const SizedBox(height: 24),
               _SectionTitle(title: l10n.alphabetLanguageSection),
               const SizedBox(height: 8),
               SegmentedButton<AlphabetLanguage>(

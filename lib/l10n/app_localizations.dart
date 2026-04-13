@@ -272,6 +272,12 @@ abstract class AppLocalizations {
   /// **'Вже є довше слово (\"{word}\")'**
   String errorLongerExists(String word);
 
+  /// No description provided for @interfaceLanguageSection.
+  ///
+  /// In uk, this message translates to:
+  /// **'Мова інтерфейсу'**
+  String get interfaceLanguageSection;
+
   /// No description provided for @langUkrainian.
   ///
   /// In uk, this message translates to:

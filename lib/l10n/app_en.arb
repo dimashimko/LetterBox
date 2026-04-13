@@ -29,6 +29,7 @@
   "errorLetterNotInAlphabet": "Letter \"{letter}\" is not in the alphabet",
   "errorDuplicate": "This word was already added",
   "errorLongerExists": "A longer word already exists (\"{word}\")",
+  "interfaceLanguageSection": "Interface language",
   "langUkrainian": "Ukrainian",
   "langRussian": "Russian",
   "langEnglish": "English",

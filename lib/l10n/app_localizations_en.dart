@@ -113,6 +113,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get interfaceLanguageSection => 'Interface language';
+
+  @override
   String get langUkrainian => 'Ukrainian';
 
   @override
