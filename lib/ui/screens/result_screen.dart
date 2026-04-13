@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:letter_box/l10n/app_localizations.dart';
 import 'package:letter_box/cubits/game_cubit.dart';
 import 'package:letter_box/cubits/game_state.dart';
 import 'package:letter_box/ui/widgets/result_letter_tile.dart';
@@ -26,12 +27,13 @@ class _ResultBody extends StatelessWidget {
     return BlocBuilder<GameCubit, GameState>(
       builder: (context, state) {
         final cubit = context.read<GameCubit>();
+        final l10n = AppLocalizations.of(context);
         final filled =
             state.entries.values.where((e) => e.bestWord != null).toList();
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Результати'),
+            title: Text(l10n.results),
             centerTitle: true,
             leading: IconButton(
               icon: const Icon(Icons.home),
@@ -59,8 +61,8 @@ class _ResultBody extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Загальний рахунок  |  '
-                      '${filled.length}/${state.totalLetters} літер',
+                      '${l10n.totalScore}  |  '
+                      '${l10n.lettersProgress(filled.length, state.totalLetters)}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
@@ -68,10 +70,10 @@ class _ResultBody extends StatelessWidget {
               ),
               Expanded(
                 child: filled.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
-                          'Жодного слова не введено',
-                          style: TextStyle(fontSize: 16),
+                          l10n.noWordsEntered,
+                          style: const TextStyle(fontSize: 16),
                         ),
                       )
                     : ListView.builder(

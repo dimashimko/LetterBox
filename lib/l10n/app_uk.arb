@@ -1,0 +1,104 @@
+{
+  "@@locale": "uk",
+  "appTitle": "Словесний Алфавіт",
+  "results": "Результати",
+  "alphabetLanguageSection": "Мова алфавіту",
+  "startLetterSection": "Початкова літера",
+  "timerSection": "Таймер",
+  "noTimer": "Без таймера",
+  "timer1min": "1 хв",
+  "timer3min": "3 хв",
+  "timer5min": "5 хв",
+  "timer10min": "10 хв",
+  "multipleWordsTitle": "Декілька слів на одну літеру",
+  "multipleWordsSubtitle": "Найдовше — повні бали, додаткові — +1 бал",
+  "startGame": "Почати гру",
+  "finishGameTooltip": "Завершити гру",
+  "wordHint": "Слово на \"{startLetter}\"...",
+  "@wordHint": {
+    "placeholders": {
+      "startLetter": {
+        "type": "String"
+      }
+    }
+  },
+  "bonusCount": "+{count} бонус",
+  "@bonusCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scorePoints": "{score} б.",
+  "@scorePoints": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "bonusPoint": "+1 б.",
+  "totalScore": "Загальний рахунок",
+  "lettersProgress": "{filled}/{total} літер",
+  "@lettersProgress": {
+    "placeholders": {
+      "filled": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "noWordsEntered": "Жодного слова не введено",
+  "gameAppBarTitle": "Літера \"{letter}\"  |  {filled}/{total}  |  {score} б.",
+  "@gameAppBarTitle": {
+    "placeholders": {
+      "letter": {
+        "type": "String"
+      },
+      "filled": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "errorGameFinished": "Гру завершено",
+  "errorEmptyWord": "Введіть слово",
+  "errorWrongStart": "Слово має починатися на \"{letter}\"",
+  "@errorWrongStart": {
+    "placeholders": {
+      "letter": {
+        "type": "String"
+      }
+    }
+  },
+  "errorTooShort": "Слово занадто коротке",
+  "errorLetterNotInAlphabet": "Літера \"{letter}\" відсутня в алфавіті",
+  "@errorLetterNotInAlphabet": {
+    "placeholders": {
+      "letter": {
+        "type": "String"
+      }
+    }
+  },
+  "errorDuplicate": "Це слово вже додано",
+  "errorLongerExists": "Вже є довше слово (\"{word}\")",
+  "@errorLongerExists": {
+    "placeholders": {
+      "word": {
+        "type": "String"
+      }
+    }
+  },
+  "langUkrainian": "Українська",
+  "langRussian": "Російська",
+  "langEnglish": "English",
+  "langUaRu": "UA/RU"
+}

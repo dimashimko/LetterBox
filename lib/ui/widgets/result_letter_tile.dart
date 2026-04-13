@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:letter_box/l10n/app_localizations.dart';
 import 'package:letter_box/models/letter_entry.dart';
 
 class ResultLetterTile extends StatelessWidget {
@@ -62,7 +63,7 @@ class ResultLetterTile extends StatelessWidget {
                 ),
               ),
               Text(
-                '${entry.bestWord!.length} б.',
+                AppLocalizations.of(context).scorePoints(entry.bestWord!.length),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: colorScheme.primary,
@@ -90,7 +91,7 @@ class ResultLetterTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '+1 б.',
+                    AppLocalizations.of(context).bonusPoint,
                     style: TextStyle(
                       fontSize: 12,
                       color: colorScheme.tertiary,

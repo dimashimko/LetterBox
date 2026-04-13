@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:letter_box/l10n/app_localizations.dart';
 
 class WordInputField extends StatefulWidget {
   final String startLetter;
@@ -56,7 +57,7 @@ class _WordInputFieldState extends State<WordInputField> {
                 autofocus: true,
                 textCapitalization: TextCapitalization.characters,
                 decoration: InputDecoration(
-                  hintText: 'Слово на "${widget.startLetter}"...',
+                  hintText: AppLocalizations.of(context).wordHint(widget.startLetter),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:letter_box/l10n/app_localizations.dart';
 import 'package:letter_box/cubits/game_cubit.dart';
 import 'package:letter_box/cubits/game_state.dart';
 import 'package:letter_box/models/game_settings.dart';
+import 'package:letter_box/ui/helpers/game_error_localizer.dart';
 import 'package:letter_box/ui/widgets/letter_tile.dart';
 import 'package:letter_box/ui/widgets/timer_display.dart';
 import 'package:letter_box/ui/widgets/word_input_field.dart';
@@ -40,20 +42,24 @@ class _GameBody extends StatelessWidget {
       child: BlocBuilder<GameCubit, GameState>(
         builder: (context, state) {
           final cubit = context.read<GameCubit>();
+          final l10n = AppLocalizations.of(context);
           final entries = state.entries.values.toList();
 
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                'Літера "${state.settings.startLetter}"  |  '
-                '${state.filledCount}/${state.totalLetters}  |  '
-                '${state.totalScore} б.',
+                l10n.gameAppBarTitle(
+                  state.settings.startLetter,
+                  state.filledCount,
+                  state.totalLetters,
+                  state.totalScore,
+                ),
               ),
               centerTitle: true,
               actions: [
                 IconButton(
                   icon: const Icon(Icons.stop_circle_outlined),
-                  tooltip: 'Завершити гру',
+                  tooltip: l10n.finishGameTooltip,
                   onPressed: () => cubit.finishGame(),
                 ),
               ],
@@ -89,7 +95,7 @@ class _GameBody extends StatelessWidget {
                         ..hideCurrentSnackBar()
                         ..showSnackBar(
                           SnackBar(
-                            content: Text(error),
+                            content: Text(error.localize(l10n)),
                             duration: const Duration(seconds: 2),
                           ),
                         );

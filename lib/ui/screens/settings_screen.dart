@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:letter_box/l10n/app_localizations.dart';
 import 'package:letter_box/cubits/settings_cubit.dart';
 import 'package:letter_box/cubits/settings_state.dart';
 import 'package:letter_box/models/game_settings.dart';
@@ -23,9 +24,11 @@ class _SettingsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Словесний Алфавіт'),
+        title: Text(l10n.appTitle),
         centerTitle: true,
       ),
       body: BlocBuilder<SettingsCubit, SettingsState>(
@@ -33,23 +36,36 @@ class _SettingsBody extends StatelessWidget {
           final cubit = context.read<SettingsCubit>();
           final alphabet = GameSettings.getAlphabet(state.language);
 
+          String languageLabel(AlphabetLanguage lang) {
+            switch (lang) {
+              case AlphabetLanguage.ua:
+                return l10n.langUkrainian;
+              case AlphabetLanguage.ru:
+                return l10n.langRussian;
+              case AlphabetLanguage.en:
+                return l10n.langEnglish;
+              case AlphabetLanguage.uaRu:
+                return l10n.langUaRu;
+            }
+          }
+
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              const _SectionTitle(title: 'Мова алфавіту'),
+              _SectionTitle(title: l10n.alphabetLanguageSection),
               const SizedBox(height: 8),
               SegmentedButton<AlphabetLanguage>(
                 segments: AlphabetLanguage.values
                     .map((lang) => ButtonSegment(
                           value: lang,
-                          label: Text(GameSettings.getLanguageLabel(lang)),
+                          label: Text(languageLabel(lang)),
                         ))
                     .toList(),
                 selected: {state.language},
                 onSelectionChanged: (s) => cubit.setLanguage(s.first),
               ),
               const SizedBox(height: 24),
-              const _SectionTitle(title: 'Початкова літера'),
+              _SectionTitle(title: l10n.startLetterSection),
               const SizedBox(height: 8),
               AlphabetSelector(
                 alphabet: alphabet,
@@ -57,33 +73,33 @@ class _SettingsBody extends StatelessWidget {
                 onSelected: cubit.setStartLetter,
               ),
               const SizedBox(height: 24),
-              const _SectionTitle(title: 'Таймер'),
+              _SectionTitle(title: l10n.timerSection),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
                 children: [
                   _TimerChip(
-                    label: 'Без таймера',
+                    label: l10n.noTimer,
                     selected: state.timerSeconds == null,
                     onTap: () => cubit.setTimer(null),
                   ),
                   _TimerChip(
-                    label: '1 хв',
+                    label: l10n.timer1min,
                     selected: state.timerSeconds == 60,
                     onTap: () => cubit.setTimer(60),
                   ),
                   _TimerChip(
-                    label: '3 хв',
+                    label: l10n.timer3min,
                     selected: state.timerSeconds == 180,
                     onTap: () => cubit.setTimer(180),
                   ),
                   _TimerChip(
-                    label: '5 хв',
+                    label: l10n.timer5min,
                     selected: state.timerSeconds == 300,
                     onTap: () => cubit.setTimer(300),
                   ),
                   _TimerChip(
-                    label: '10 хв',
+                    label: l10n.timer10min,
                     selected: state.timerSeconds == 600,
                     onTap: () => cubit.setTimer(600),
                   ),
@@ -91,10 +107,8 @@ class _SettingsBody extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               SwitchListTile(
-                title: const Text('Декілька слів на одну літеру'),
-                subtitle: const Text(
-                  'Найдовше — повні бали, додаткові — +1 бал',
-                ),
+                title: Text(l10n.multipleWordsTitle),
+                subtitle: Text(l10n.multipleWordsSubtitle),
                 value: state.allowMultipleWords,
                 onChanged: (_) => cubit.toggleMultipleWords(),
               ),
@@ -109,9 +123,9 @@ class _SettingsBody extends StatelessWidget {
                   );
                 },
                 icon: const Icon(Icons.play_arrow),
-                label: const Text(
-                  'Почати гру',
-                  style: TextStyle(fontSize: 18),
+                label: Text(
+                  l10n.startGame,
+                  style: const TextStyle(fontSize: 18),
                 ),
                 style: FilledButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),

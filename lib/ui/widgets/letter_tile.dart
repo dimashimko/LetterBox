@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:letter_box/l10n/app_localizations.dart';
 import 'package:letter_box/models/letter_entry.dart';
 
 class LetterTile extends StatelessWidget {
@@ -75,7 +76,7 @@ class LetterTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 2),
                     child: Text(
-                      '+${entry.bonusWords.length} бонус',
+                      AppLocalizations.of(context).bonusCount(entry.bonusWords.length),
                       style: TextStyle(
                         fontSize: 12,
                         color: colorScheme.tertiary,

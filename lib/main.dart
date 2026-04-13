@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:letter_box/l10n/app_localizations.dart';
 import 'package:letter_box/ui/screens/settings_screen.dart';
 
 void main() {
@@ -11,8 +12,10 @@ class LetterBoxApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Словесний Алфавіт',
+      title: 'Letter Box',
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.indigo,

@@ -38,19 +38,6 @@ class GameSettings extends Equatable {
     }
   }
 
-  static String getLanguageLabel(AlphabetLanguage language) {
-    switch (language) {
-      case AlphabetLanguage.ua:
-        return 'Українська';
-      case AlphabetLanguage.ru:
-        return 'Російська';
-      case AlphabetLanguage.en:
-        return 'English';
-      case AlphabetLanguage.uaRu:
-        return 'UA/RU';
-    }
-  }
-
   GameSettings copyWith({
     String? startLetter,
     AlphabetLanguage? language,

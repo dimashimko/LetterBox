@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:letter_box/models/game_error.dart';
 import 'package:letter_box/models/game_settings.dart';
 import 'package:letter_box/models/letter_entry.dart';
 import 'package:letter_box/cubits/game_state.dart';
@@ -43,32 +44,41 @@ class GameCubit extends Cubit<GameState> {
     });
   }
 
-  /// Returns error message or null on success.
-  String? submitWord(String word) {
-    if (state.status == GameStatus.finished) return 'Гру завершено';
+  /// Returns error or null on success.
+  GameErrorResult? submitWord(String word) {
+    if (state.status == GameStatus.finished) {
+      return const GameErrorResult(GameError.gameFinished);
+    }
 
     final trimmed = word.trim();
-    if (trimmed.isEmpty) return 'Введіть слово';
+    if (trimmed.isEmpty) {
+      return const GameErrorResult(GameError.emptyWord);
+    }
 
     final upperWord = trimmed.toUpperCase();
     final startLetter = state.settings.startLetter.toUpperCase();
 
     if (!upperWord.startsWith(startLetter)) {
-      return 'Слово має починатися на "$startLetter"';
+      return GameErrorResult(GameError.wrongStart, {'letter': startLetter});
     }
 
-    if (upperWord.length < 2) return 'Слово занадто коротке';
+    if (upperWord.length < 2) {
+      return const GameErrorResult(GameError.tooShort);
+    }
 
     final lastChar = upperWord[upperWord.length - 1];
 
     if (!state.entries.containsKey(lastChar)) {
-      return 'Літера "$lastChar" відсутня в алфавіті';
+      return GameErrorResult(
+        GameError.letterNotInAlphabet,
+        {'letter': lastChar},
+      );
     }
 
     final currentEntry = state.entries[lastChar]!;
 
     if (currentEntry.bestWord?.toUpperCase() == upperWord) {
-      return 'Це слово вже додано';
+      return const GameErrorResult(GameError.duplicate);
     }
 
     final newEntries = Map<String, LetterEntry>.from(state.entries);
@@ -101,7 +111,10 @@ class GameCubit extends Cubit<GameState> {
           bestWord: () => trimmed,
         );
       } else {
-        return 'Вже є довше слово ("${currentEntry.bestWord}")';
+        return GameErrorResult(
+          GameError.longerExists,
+          {'word': currentEntry.bestWord!},
+        );
       }
     }
 
